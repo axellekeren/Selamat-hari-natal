@@ -85,35 +85,44 @@
     </div>
 
     <script>
-        // Tentukan tanggal Natal
-        var natal = new Date("December 25, 2024 00:00:00").getTime();
+    // Tentukan tanggal Natal
+    var natal = new Date("August 17, 2024 13:35:00").getTime();
 
-        // Update hitungan setiap 1 detik
-        var countdownInterval = setInterval(function() {
+    // Update hitungan setiap 1 detik
+    var countdownInterval = setInterval(function() {
 
-            // Ambil tanggal dan waktu saat ini
-            var now = new Date().getTime();
+        // Ambil tanggal dan waktu saat ini
+        var now = new Date().getTime();
 
-            // Hitung jarak waktu antara sekarang dan Natal
-            var distance = natal - now;
+        // Hitung jarak waktu antara sekarang dan Natal
+        var distance = natal - now;
 
-            // Hitung waktu untuk hari, jam, menit dan detik
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        // Hitung waktu untuk hari, jam, menit dan detik
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Tampilkan hasil hitungan mundur
+        // Tentukan apakah hari ini adalah tanggal 25 Desember
+        var currentDate = new Date();
+        var isChristmas = (currentDate.getMonth() == 11 && currentDate.getDate() == 25);
+
+        if (isChristmas) {
+            // Jika hari ini adalah Natal, tampilkan ucapan Natal
+            document.getElementById("countdown").style.display = "none";
+            document.getElementById("message").innerHTML = "Selamat Natal! Semoga damai dan sukacita Natal senantiasa menyertai kita.";
+        } else {
+            // Jika belum Natal, tampilkan hitungan mundur
             document.getElementById("countdown").innerHTML = days + " Hari " + hours + " Jam "
             + minutes + " Menit " + seconds + " Detik ";
+            document.getElementById("message").innerHTML = "";
+        }
 
-            // Jika hitungan mundur selesai, tampilkan ucapan Natal
-            if (distance < 0) {
-                clearInterval(countdownInterval);
-                document.getElementById("countdown").style.display = "none";
-                document.getElementById("message").innerHTML = "Selamat Natal! Semoga damai dan sukacita Natal senantiasa menyertai kita.";
-            }
-        }, 1000);
-    </script>
+        // Jika hitungan mundur selesai (pada tanggal 25 Desember), berhenti update
+        if (distance < 0) {
+            clearInterval(countdownInterval);
+        }
+    }, 1000);
+</script>
 </body>
 </html>
