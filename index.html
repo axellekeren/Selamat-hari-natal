@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Selamat Natal!</title>
+    <link rel="icon" href="axelle sains website.png" type="image/x-icon">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -20,35 +21,17 @@
             text-shadow: 4px 4px #d62828;
             animation: fadeIn 2s ease-in-out;
         }
-        #countdown {
-            font-size: 2em;
-            color: #f0f0f0;
-            margin: 20px 0;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 15px;
-            display: inline-block;
-            box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 3s ease-in-out;
-        }
         #message {
             font-size: 3em;
             color: #ffcc00;
             text-shadow: 4px 4px #ff5733;
-            display: none; /* Disembunyikan sampai waktu yang ditentukan */
             animation: pulse 2s infinite;
             margin-top: 30px;
         }
         .christmas-tree {
             width: 150px;
             margin: 20px auto;
-            display: none; /* Disembunyikan sampai waktu yang ditentukan */
             animation: slideIn 2s ease-in-out;
-        }
-        .logo {
-            width: 200px;
-            margin: 20px auto;
-            animation: fadeIn 2s ease-in-out;
         }
         /* Animasi */
         @keyframes fadeIn {
@@ -64,97 +47,33 @@
             from { transform: translateY(-50px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
-        .snowfall {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 1000;
-        }
-        .snowflake {
-            position: absolute;
-            top: -10px;
-            width: 20px;
-            height: 20px;
-            background-image: url('https://example.com/snowflake.png'); /* Ganti dengan URL gambar kepingan salju */
-            background-size: cover;
-            animation: fall linear infinite;
-        }
-        @keyframes fall {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(100vh); }
-        }
     </style>
 </head>
 <body>
-    <div class="snowfall" id="snowfall"></div> <!-- Efek salju -->
-    <img src="preview (1).png" alt="Logo" class="logo"> <!-- Gambar logo -->
     <h1>Selamat Natal!</h1>
     <img src="https://example.com/christmas-tree.png" alt="Pohon Natal" class="christmas-tree">
-    <div id="countdown"></div>
-    <div id="message">Damai di bumi, sukacita di hati. Selamat Natal! Semoga semangat Natal menerangi hari-hari Anda.</div>
+    <div id="message"></div>
 
     <script>
-        // Tentukan tanggal untuk cek (misalnya sekarang)
-        var natal = new Date("August 18, 2024 13:38:00").getTime(); // Ubah ke waktu sekarang atau waktu dekat
+        // Ubah tanggal Natal untuk tes
+        var natal = new Date("August 18, 2024 13:42:00").getTime(); // Ubah ke waktu saat ini untuk tes
 
-        // Update hitungan setiap 1 detik
-        var countdownInterval = setInterval(function() {
+        // Ambil tanggal dan waktu saat ini
+        var now = new Date().getTime();
 
-            // Ambil tanggal dan waktu saat ini
-            var now = new Date().getTime();
+        // Hitung jarak waktu antara sekarang dan Natal
+        var distance = natal - now;
 
-            // Hitung jarak waktu antara sekarang dan waktu yang ditentukan
-            var distance = natal - now;
+        // Tentukan elemen pesan
+        var message = document.getElementById("message");
 
-            // Hitung waktu untuk hari, jam, menit dan detik
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Tentukan apakah hari ini adalah waktu yang ditentukan
-            var currentDate = new Date();
-            var isChristmas = (currentDate.getMonth() == 7 && currentDate.getDate() == 18); // Ubah ini sesuai dengan waktu yang ditentukan
-
-            if (isChristmas) {
-                // Jika waktu yang ditentukan, sembunyikan hitungan mundur dan tampilkan ucapan
-                document.getElementById("countdown").style.display = "none";
-                document.getElementById("message").style.display = "block";
-                document.querySelector(".christmas-tree").style.display = "block";
-            } else {
-                // Jika belum waktunya, tampilkan hitungan mundur dan sembunyikan ucapan
-                document.getElementById("countdown").innerHTML = days + " Hari " + hours + " Jam "
-                + minutes + " Menit " + seconds + " Detik ";
-                document.getElementById("message").style.display = "none";
-                document.querySelector(".christmas-tree").style.display = "none";
-            }
-
-            // Jika hitungan mundur selesai (pada waktu yang ditentukan), berhenti update
-            if (distance < 0) {
-                clearInterval(countdownInterval);
-            }
-        }, 1000);
-
-        // Fungsi untuk menghasilkan kepingan salju
-        function createSnowflakes() {
-            var snowfall = document.getElementById("snowfall");
-
-            for (var i = 0; i < 100; i++) {
-                var snowflake = document.createElement("div");
-                snowflake.className = "snowflake";
-                snowflake.style.left = Math.random() * 100 + "vw";
-                snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
-                snowflake.style.opacity = Math.random();
-                snowfall.appendChild(snowflake);
-            }
+        if (distance > 0) {
+            // Sebelum Natal
+            message.innerHTML = "Damai di bumi, sukacita di hati. Selamat Natal! Semoga semangat Natal menerangi hari-hari Anda";
+        } else {
+            // Pada atau setelah Natal
+            message.innerHTML = "Damai di bumi, sukacita di hati. Selamat Natal! Semoga semangat Natal menerangi hari-hari Anda.";
         }
-
-        // Panggil fungsi untuk membuat kepingan salju
-        createSnowflakes();
     </script>
 </body>
 </html>
