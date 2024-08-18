@@ -64,11 +64,24 @@
 </head>
 <body>
     <h1>Selamat Natal!</h1>
-    <img src="https://example.com/christmas-tree.png" alt="Pohon Natal" class="christmas-tree">
-    <div id="countdown"></div>
+   <div id="countdown"></div>
     <div id="message"></div>
+    <div id="server-time"></div> <!-- Menampilkan waktu server -->
+
+    <?php
+    date_default_timezone_set('Asia/Jakarta'); // Atur zona waktu jika diperlukan
+    echo "<script>document.getElementById('server-time').innerHTML = 'Waktu Server: " . date("Y-m-d H:i:s") . "';</script>";
+    ?>
 
     <script>
+         // Ambil waktu server dari API
+        fetch('https://worldtimeapi.org/api/ip') // Ganti dengan URL API yang sesuai
+            .then(response => response.json())
+            .then(data => {
+                var serverTime = new Date(data.datetime);
+                document.getElementById('server-time').innerHTML = 'Waktu Server: ' + serverTime.toLocaleString();
+            })
+            .catch(error => console.error('Error fetching server time:', error));
         // Tentukan tanggal Natal
         var natal = new Date("December 25, 2024 00:00:00").getTime(); // Ubah ke tanggal yang sesuai
 
