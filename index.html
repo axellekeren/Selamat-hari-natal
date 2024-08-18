@@ -70,7 +70,7 @@
 
     <script>
         // Tentukan tanggal Natal
-        var natal = new Date("August 13, 2024 13:49:00").getTime(); // Ubah ke tanggal yang sesuai
+        var natal = new Date("August 13, 2024 13:53:00").getTime(); // Ubah ke tanggal yang sesuai
 
         // Update hitungan setiap 1 detik
         var countdownInterval = setInterval(function() {
@@ -95,13 +95,13 @@
             if (distance > 0) {
                 // Sebelum Natal
                 countdown.innerHTML = days + " Hari " + hours + " Jam " + minutes + " Menit " + seconds + " Detik ";
-                message.innerHTML = "Tunggu sampai hari Natal ya!";
+                message.innerHTML = "Damai di bumi, sukacita di hati. Selamat Natal! Semoga semangat Natal menerangi hari-hari Anda.";
                 message.style.display = "block";
                 christmasTree.style.display = "none";
             } else {
                 // Pada atau setelah Natal
                 countdown.style.display = "none";
-                message.innerHTML = "Damai di bumi, sukacita di hati. Selamat Natal! Semoga semangat Natal menerangi hari-hari Anda.";
+                message.innerHTML = "Tunggu sampai hari Natal ya!";
                 message.style.display = "block";
                 christmasTree.style.display = "block";
             }
